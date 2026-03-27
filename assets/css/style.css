@@ -1367,7 +1367,7 @@ blockquote {
    -------------------------------------------------------------------------- */
 .case-timeline {
     position: relative;
-    padding: 40px 0;
+    padding: 50px 0 60px;
     max-width: 100%;
     overflow-x: auto;
 }
@@ -1378,7 +1378,6 @@ blockquote {
     background: var(--mag-bg-paper-warm);
     border-radius: 4px;
     position: relative;
-    overflow: hidden;
 }
 
 .case-timeline-fill {
@@ -1417,6 +1416,12 @@ blockquote {
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 2;
+    width: 90px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
 }
 
 .case-timeline-milestone--visible {
@@ -1430,7 +1435,12 @@ blockquote {
     background: #FFFFFF;
     border: 3px solid var(--mag-accent-sage);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    margin: 0 auto;
+    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
 .case-timeline-milestone[data-phase="2"] .case-tl-dot {
@@ -1442,29 +1452,31 @@ blockquote {
 }
 
 .case-tl-label {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     white-space: nowrap;
     font-family: var(--mag-font-sans);
     font-size: var(--mag-text-xs);
     color: var(--mag-text-muted);
-}
-
-.case-timeline-milestone:nth-child(odd) .case-tl-label {
-    top: 28px;
+    order: 3; /* below dot */
+    margin-top: 16px;
 }
 
 .case-timeline-milestone:nth-child(even) .case-tl-label {
-    bottom: 28px;
+    order: 0; /* above dot for even */
+    margin-top: 0;
+    margin-bottom: 16px;
 }
 
 .case-tl-data {
     font-weight: 700;
     color: var(--mag-text-ink);
-    display: block;
     font-size: 0.8rem;
-    margin-top: 2px;
+    line-height: 1.4;
+    order: 1; /* always below dot for odd */
+}
+
+.case-timeline-milestone:nth-child(even) .case-tl-data {
+    order: 1;
+    margin-top: 16px;
 }
 
 /* --------------------------------------------------------------------------
